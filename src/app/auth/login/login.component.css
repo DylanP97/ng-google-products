@@ -1,0 +1,22 @@
+form {
+  margin: auto;
+  max-width: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-group {
+  width: 90%;
+  margin: 1.2em;
+}
+
+.log-btn.dark-mode {
+  color: #222 !important;
+  background-color: white !important;
+}
+
+.mat-mdc-icon-button {
+  color: #222 !important;
+}/*# sourceMappingURL=login.component.css.map */

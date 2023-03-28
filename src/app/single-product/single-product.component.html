@@ -1,0 +1,35 @@
+<mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+<div class="product-container" *ngIf="product$ | async as product">
+  <img [src]="product?.imageUrl" alt="">
+  <div class="product-info">
+    <h1 class="product-name">{{ product?.name }}</h1>
+    <p class="category">{{ product?.category }}</p>
+    <br>
+    <p>{{ product.description }}</p>
+    <br>
+    <p>Visit at <a href="https://{{ product.website }}"  target="_blank">{{ product.website }}</a></p>
+    <br>
+    <p>Released in {{ product.yearLaunched }}</p>
+    <p>Added by {{ product.username }}</p>
+    <br>
+    <div class="like-buttons">
+      <div class="likes">
+        <button mat-icon-button [disabled]="disliked" (click)="onLike()">
+          <mat-icon [ngClass]="{ 'liked': liked, 'disabled': disliked }">thumb_up_alt</mat-icon>
+        </button>
+        <span>{{ product.likes }}</span>
+      </div>
+      <div class="dislikes">
+        <button mat-icon-button [disabled]="liked" (click)="onDislike()">
+          <mat-icon [ngClass]="{ 'disliked': disliked, 'disabled': liked }">thumb_down_alt</mat-icon>
+        </button>
+        <span>{{ product.dislikes }}</span>
+      </div>
+    </div>
+    <div class="control-buttons">
+      <button mat-raised-button color="accent" (click)="onBack()">BACK</button>
+      <button mat-raised-button color="primary" (click)="onModify()" *ngIf="userId === product.userId">MODIFY</button>
+      <button mat-raised-button color="warn" (click)="onDelete()" *ngIf="userId === product.userId">DELETE</button>
+    </div>
+  </div>
+</div>

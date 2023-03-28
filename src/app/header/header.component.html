@@ -1,0 +1,70 @@
+<nav [ngClass]="{'dark-mode': darkModeService.isDarkMode}" >
+  <div class="left-nav">
+    <ul>
+      <li *ngIf="isAuth$ | async">
+        <a
+          routerLink="products"
+          routerLinkActive="active"
+          *ngIf="isAuth$ | async"
+        >
+          All Products
+        </a>
+      </li>
+      <li *ngIf="isAuth$ | async">
+        <a
+          routerLink="new-product"
+          routerLinkActive="active"
+          *ngIf="isAuth$ | async"
+        >
+          Add a Google Product
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="logo">
+    <div class="logo-image"></div>
+    <div class="logo-text">
+      <h1>Google Products Index</h1>
+    </div>
+  </div>
+  <div class="right-nav">
+    <ul>
+      <li *ngIf="!(isAuth$ | async)">
+        <a
+          routerLink="signup"
+          routerLinkActive="active"
+          *ngIf="!(isAuth$ | async)"
+        >
+          Sign Up
+        </a>
+      </li>
+      <li *ngIf="!(isAuth$ | async)">
+        <a
+          routerLink="login"
+          routerLinkActive="active"
+          *ngIf="!(isAuth$ | async)"
+        >
+          Login
+        </a>
+      </li>
+      <li *ngIf="isAuth$ | async">
+        <a (click)="onLogout()" *ngIf="isAuth$ | async"> Logout </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="sub-nav" [ngClass]="{'dark-mode': darkModeService.isDarkMode}" >
+  <div class="dark-mode-toggle">
+    <span class="material-icons material-symbols-outlined" [ngClass]="{'dark-mode-icon': darkModeService.isDarkMode}">
+      {{ darkModeService.isDarkMode ? 'dark_mode' : 'wb_sunny' }}
+    </span>
+    <p>DARK MODE</p>
+    <mat-slide-toggle
+      (change)="toggleDarkMode()"
+      [checked]="darkModeService.isDarkMode"
+      [disabled]="false"
+    ></mat-slide-toggle>
+  </div>
+  <h5>Listing all Google Products</h5>
+  <h5>Listing all Google Products</h5>
+</div>

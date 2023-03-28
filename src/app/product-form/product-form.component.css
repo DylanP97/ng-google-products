@@ -1,0 +1,21 @@
+form {
+  margin: auto;
+  max-width: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-group {
+  width: 90%;
+  margin: 1.2em;
+}
+
+input[type=file] {
+  display: none;
+}
+
+textarea {
+  height: 150px;
+}/*# sourceMappingURL=product-form.component.css.map */

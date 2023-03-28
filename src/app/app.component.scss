@@ -32,7 +32,8 @@ footer {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: url(../assets/images/angular_whiteTransparent_withMargin.png) top 0 left 0 repeat, url(../assets/images/angular_whiteTransparent_withMargin.png) top 80px left 160px repeat;
+  background: url(../assets/images/angular_whiteTransparent_withMargin.png) top 0 left 0 repeat,
+    url(../assets/images/angular_whiteTransparent_withMargin.png) top 80px left 160px repeat;
   opacity: 0.05;
   background-size: 320px auto;
 }
@@ -45,4 +46,5 @@ footer {
 
 .dark-mode .footer {
   background-color: #222;
-}/*# sourceMappingURL=app.component.css.map */
+}
+

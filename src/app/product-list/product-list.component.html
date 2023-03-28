@@ -1,0 +1,48 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<ng-container *ngIf="products$ | async as products" matRipple>
+  <p *ngIf="!loading && products.length <= 0">No products to display!</p>
+  <p class="list-title" *ngIf="!loading && products.length > 0">
+    All the products made by Google
+    <a
+      href="https://about.google/intl/ALL_fr/products/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Reference</a
+    >
+  </p>
+  <br />
+  <mat-paginator
+    [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
+    [length]="totalProducts$ | async"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="currentPage"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+    color="primary"
+    >
+  </mat-paginator>
+
+  <br />
+  <div class="product-list" *ngIf="!loading && products.length > 0">
+    <div
+      class="product-list-item"
+      [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
+      *ngFor="let product of products"
+      (click)="onClickProduct(product._id)"
+    >
+      <img alt="ProductImage" [src]="product.imageUrl" />
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.category }}</p>
+      <hr />
+      <p>{{ product.likes }} likes</p>
+      <p>{{ product.dislikes }} dislikes</p>
+      <hr />
+      <p>Added by {{ product.username }}</p>
+      <br />
+    </div>
+  </div>
+</ng-container>
+<button class="add-new" (click)="onAddNew()" mat-fab extended>
+  <mat-icon>add</mat-icon>
+</button>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DarkModeService } from './services/dark-mode.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng-google';
+  constructor(public darkModeService: DarkModeService) {}
+
+  title = 'ng-google-products';
 }
