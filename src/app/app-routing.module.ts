@@ -7,6 +7,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { ChronologySliderComponent } from './chronology-slider/chronology-slider.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'product/:id', component: SingleProductComponent, canActivate: [AuthGuard] },
   { path: 'new-product', component: ProductFormComponent, canActivate: [AuthGuard] },
   { path: 'modify-product/:id', component: ProductFormComponent, canActivate: [AuthGuard] },
+  { path: 'chronology-slider', component: ChronologySliderComponent, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'products'},
   { path: '**', component: PageNotFoundComponent }
 ];

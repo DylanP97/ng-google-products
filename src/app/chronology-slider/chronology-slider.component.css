@@ -1,0 +1,66 @@
+.list-title {
+  text-align: center;
+  margin: 2em auto;
+}
+
+.slider-container {
+  position: relative;
+  width: 95%;
+  height: 2px;
+  background-color: #bdbdbd;
+  margin: 0 auto;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.slider-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.slider-item {
+  position: relative;
+}
+
+.slider-point {
+  position: absolute;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #673ab7;
+}
+
+.slider-thumb {
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #673ab7;
+  cursor: grab;
+  z-index: 1;
+}
+
+.slider-thumb:active {
+  cursor: grabbing;
+}
+
+.dark-mode .slider-point {
+  background-color: black;
+}
+
+.dark-mode .slider-thumb {
+  background-color: black;
+}/*# sourceMappingURL=chronology-slider.component.css.map */

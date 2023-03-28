@@ -30,6 +30,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DarkModeService } from './services/dark-mode.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ChronologySliderComponent } from './chronology-slider/chronology-slider.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ProductFormComponent,
     HeaderComponent,
     PageNotFoundComponent,
+    ChronologySliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSliderModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

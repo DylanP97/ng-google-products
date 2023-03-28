@@ -21,7 +21,7 @@
   -o-object-fit: cover;
      object-fit: cover;
   margin: 10%;
-  max-width: 120px;
+  max-width: 100px;
 }
 .product-list-item h4 {
   margin: 0;
@@ -46,7 +46,7 @@
 .add-new {
   padding: 0 12px;
   position: fixed;
-  bottom: 100px;
+  bottom: 200px;
   margin-left: 10px;
 }
 

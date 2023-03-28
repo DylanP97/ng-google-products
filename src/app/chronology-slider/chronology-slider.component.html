@@ -1,0 +1,20 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<section>
+  <h2 class="list-title">
+    Chronology of the release date of Google technologies!
+  </h2>
+
+  <div class="slider-container">
+    <div class="slider" #slider>
+      <div class="slider-track">
+
+        <div class="slider-item" *ngFor="let product of products">
+          <div [style.left.%]="getSliderPosition(product.yearLaunched)" class="slider-point"></div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</section>
+

@@ -4,6 +4,7 @@ import {
   forkJoin,
   map,
   mapTo,
+  Observable,
   of,
   Subject,
   switchMap,
@@ -19,6 +20,7 @@ import { UsersService } from './users.service';
   providedIn: 'root',
 })
 export class ProductsService {
+  allProducts$ = new Subject<Product[]>();
   products$ = new Subject<Product[]>();
   totalProducts$ = new Subject<number>();
 
@@ -27,6 +29,21 @@ export class ProductsService {
     private auth: AuthService,
     private usersService: UsersService
   ) {}
+
+
+  getAllProducts(): Observable<Product[]> {
+    return this.http
+      .get<{ products: Product[] }>('http://localhost:3000/api/product/all')
+      .pipe(
+        map(response => response.products),
+        tap(products => console.log(products)),
+        catchError((error) => {
+          console.error(error.error.message);
+          return of([]);
+        })
+      );
+  }
+  
 
   getProducts(page: number = 0, pageSize: number = 10) {
     const params = new HttpParams()
