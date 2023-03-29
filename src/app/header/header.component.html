@@ -7,7 +7,7 @@
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          All Products
+          All Technologies
         </a>
       </li>
       <li *ngIf="isAuth$ | async">
@@ -16,15 +16,31 @@
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          Add a Google Product
+          Add a Google Technology
         </a>
       </li>
     </ul>
   </div>
   <div class="logo">
-    <div class="logo-image"></div>
     <div class="logo-text">
-      <h1>Google Products Index</h1>
+      <h3 aria-label="Products Google" class="animated-headline__headline">
+        <br />G<div class="animated-headline__icons-container">
+          <img
+            src="https://lh3.googleusercontent.com/jUoaTIlBn5ibfQcND2n5OMD6Z7xoqNj-ShHlFR6QuLffLXD5pS8V2eNg1rGlrsRrnDkoQ28O8UHzqzBQKAGY4l1CS2NQSq2SkRScK6FOjl82jppyohK-"
+            aria-hidden="true"
+            class="animated-headline__icon loaded"
+          />
+          <img
+            src="https://lh3.googleusercontent.com/PtL9QBP58JZC0A0k1u4fSn-rXbpaG52216P0l4ydM3c21L78uPPad73jY6ngd2tS-qu8Ec7jV_oxz8wK70fhBxYrffuWUGmuh-HfMyUsfUJSPQzGuCOW"
+            aria-hidden="true"
+            class="animated-headline__icon loaded"
+          />
+        </div>g<div class="animated-headline__icons-container"><img
+          src="https://lh3.googleusercontent.com/p4M1mK1Lbtc2tt54b6JUQUJ5U8RcwHnEAPH7_87X2NH9Rc8N9ek0Xm2BUq_wmLuOWXlylcDlZFOg4xF3aQtwsyF9frOHoqiQdWVpG-v4VO-Jb_4lIQ"
+          aria-hidden="true"
+          class="animated-headline__icon loaded"
+        /></div>e Products<br />
+      </h3>
     </div>
   </div>
   <div class="right-nav">
@@ -72,7 +88,7 @@
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        Listing all Google Products
+        Listing all Google Tech Products
       </a>
     </li>
   </ul>
@@ -83,7 +99,7 @@
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        Chronology History
+        Chronology Release Date
       </a>
     </li>
   </ul>

@@ -1,3 +1,19 @@
+.animated-headline__headline {
+  font-size: 48px;
+  font-family: "Google Sans", Roboto, Arial, Helvetica, sans-serif;
+}
+
+.animated-headline__icons-container {
+  display: inline;
+  letter-spacing: -0.3em;
+}
+
+.animated-headline__icon.loaded {
+  height: 38px;
+  opacity: 1;
+  padding: 0 2px;
+}
+
 nav {
   box-sizing: border-box;
   width: 100%;

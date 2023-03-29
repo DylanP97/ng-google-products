@@ -3,18 +3,35 @@
   <h2 class="list-title">
     Chronology of the release date of Google technologies!
   </h2>
-
-  <div class="slider-container">
-    <div class="slider" #slider>
-      <div class="slider-track">
-
-        <div class="slider-item" *ngFor="let product of products">
-          <div [style.left.%]="getSliderPosition(product.yearLaunched)" class="slider-point"></div>
-        </div>
-        
-      </div>
+  <br />
+  <div class="container">
+    <mat-slider
+      #slider (change)="onSliderChange($event)"
+      class="slider"
+      [min]="startYear"
+      [max]="endYear"
+      step="1"
+      showTickMarks
+      discrete
+    >
+      <input matSliderThumb />
+    </mat-slider>
+  </div>
+  <br>
+  <div class="container" *ngFor="let product of products">
+    <div [style.display]="formatDBDateToYear(product.yearLaunched) === selectedYear ? 'block' : 'none'">
+      <mat-card class="description-card" [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }">
+        <mat-card-header>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }">{{ product.category }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}">
+        <mat-card-content>
+          <p>{{ product.description }}</p>
+          <p>Launched in {{ formatDBDateToYear(product.yearLaunched) }}</p>
+          <p>Website: <a href="{{ product.website }}" target="_blank">{{ product.website }}</a></p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
-  
 </section>
-
