@@ -3,23 +3,25 @@
   <h2 class="list-title">
     Chronology of the release date of Google technologies!
   </h2>
+  <p class="list-paragraph">When the thumb is selected, you can use the arrows of your keyboard to switch between months</p>
   <br />
   <div class="container">
     <mat-slider
-      #slider (change)="onSliderChange($event)"
+      #slider
+      (change)="onSliderChange($event)"
       class="slider"
-      [min]="startYear"
-      [max]="endYear"
+      [min]="0"
+      [max]="this.totalProducts - 1"
       step="1"
       showTickMarks
       discrete
     >
-      <input matSliderThumb />
+      <input matSliderThumb #sliderThumb />
     </mat-slider>
   </div>
   <br>
   <div class="container" *ngFor="let product of products">
-    <div [style.display]="formatDBDateToYear(product.yearLaunched) === selectedYear ? 'block' : 'none'">
+    <div [style.display]="checkSelected(product._id) ? 'block' : 'none'">
       <mat-card class="description-card" [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }">
         <mat-card-header>
           <mat-card-title>{{ product.name }}</mat-card-title>
@@ -28,8 +30,7 @@
         <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}">
         <mat-card-content>
           <p>{{ product.description }}</p>
-          <p>Launched in {{ formatDBDateToYear(product.yearLaunched) }}</p>
-          <p>Website: <a href="{{ product.website }}" target="_blank">{{ product.website }}</a></p>
+          <p>Launched in {{ product.dbDate }}</p>
         </mat-card-content>
       </mat-card>
     </div>

@@ -17,9 +17,9 @@
   cursor: pointer;
 }
 .product-list-item img {
-  max-height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  height: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
   margin: 10%;
   max-width: 100px;
 }
@@ -77,7 +77,15 @@
   display: flex;
 }
 
+.mat-mdc-paginator {
+  background-color: rgba(104, 58, 183, 0);
+}
+
 .dark-mode.mat-mdc-paginator {
-  background-color: rgb(71, 71, 71) !important;
+  background-color: rgba(71, 71, 71, 0) !important;
   color: white !important;
+}
+
+.mat-mdc-paginator-container * {
+  border-color: white !important;
 }/*# sourceMappingURL=product-list.component.css.map */

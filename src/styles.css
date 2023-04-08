@@ -34,6 +34,7 @@ body {
   margin: 0;
   white-space: pre-line;
   min-height: 100vh;
+  background-color: rgba(104, 58, 183, 0.3019607843);
 }
 
 mat-spinner {

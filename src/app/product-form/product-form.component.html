@@ -9,18 +9,14 @@
     <input matInput type="text" id="category" formControlName="category">
   </mat-form-field>
   <mat-form-field appearance="fill" class="form-group">
-    <mat-label for="website">Website</mat-label>
-    <input matInput type="text" class="form-control" id="website" formControlName="website">
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="form-group">
     <mat-label for="description">Description</mat-label>
     <textarea matInput class="form-control" id="description" rows="5" formControlName="description"></textarea>
   </mat-form-field>
 
 
   <mat-form-field appearance="fill" class="form-group">
-    <mat-label for="yearLaunched">Choose a creation/release date</mat-label>
-    <input matInput type="text" class="form-control" id="yearLaunched" formControlName="yearLaunched" [matDatepicker]="picker">
+    <mat-label for="dbDate">Choose a creation/release date</mat-label>
+    <input matInput type="text" class="form-control" id="dbDate" formControlName="dbDate" [matDatepicker]="picker">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -29,16 +25,14 @@
   <br>
 
   <div class="form-group">
-    <input accept="image/*" formControlName="image"  #imageInput (change)="onFileAdded($event)" class="ng-hide" id="input-file-id" multiple type="file" />
-    <label for="input-file-id" class="md-button md-raised md-primary">
-      <button mat-fab extended color="primary" (click)="imageInput.click()">
-        <mat-icon>style</mat-icon>
+    <label for="image" class="md-button md-raised md-primary">
         Add or change Icon
-      </button>
     </label>
+    <input accept="image/*" #imageInput (change)="onFileAdded($event)" class="ng-hide" id="image" multiple type="file" />
     <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px; display: block; margin-top: 30px" />
   </div>
+  
   <br>
   <br>
-  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="productForm.invalid">Submit</button>
+  <button type="button" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="productForm.invalid">Submit</button>
 </form>

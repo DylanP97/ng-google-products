@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../models/Product.model';
 import { AuthService } from '../services/auth.service';
 import { catchError, EMPTY, switchMap, tap } from 'rxjs';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-product-form',
@@ -45,11 +43,9 @@ export class ProductFormComponent implements OnInit {
         }
       }),
       tap(product => {
-        if (product) {
           this.product = product;
           this.initModifyForm(product);
           this.loading = false;
-        }
       }),
       catchError(error => this.errorMsg = JSON.stringify(error))
     ).subscribe();
@@ -61,10 +57,9 @@ export class ProductFormComponent implements OnInit {
       category: [null, Validators.required],
       description: [null, Validators.required],
       image: [null, Validators.required],
-      website: [null, Validators.required],
-      yearLaunched: [null, Validators.required],
+      dbDate: [null, Validators.required],
     });
-  }
+  }  
 
   initModifyForm(product: Product) {
     this.productForm = this.formBuilder.group({
@@ -72,27 +67,26 @@ export class ProductFormComponent implements OnInit {
       category: [product.category, Validators.required],
       description: [product.description, Validators.required],
       image: [product.imageUrl, Validators.required],
-      website: [product.website, Validators.required],
-      yearLaunched: [product.yearLaunched, Validators.required],
+      dbDate: [new Date(product.dbDate), Validators.required],
     });
     this.imagePreview = this.product.imageUrl;
   }
 
   onSubmit() {
+    const dateInputResponse = this.productForm.get('dbDate')!.value;
+    const dateMMDDYYYY = dateInputResponse.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
     this.loading = true;
     const newProduct = new Product();
     newProduct.name = this.productForm.get('name')!.value;
     newProduct.category = this.productForm.get('category')!.value;
     newProduct.description = this.productForm.get('description')!.value;
-    newProduct.website = this.productForm.get('website')!.value;
-    newProduct.yearLaunched = this.productForm.get('yearLaunched')!.value;
+    newProduct.dbDate = dateMMDDYYYY;
+    newProduct.dbYear = dateInputResponse.getFullYear();
     newProduct.userId = this.auth.getUserId();
-    newProduct.username = this.auth.getUsername();
     
     if (this.mode === 'new') {
       this.products.createProduct(newProduct, this.productForm.get('image')!.value).pipe(
-        tap(({ message }) => {
-          console.log(message);
+        tap(( message ) => {
           this.loading = false;
           this.router.navigate(['/products']);
         }),
@@ -105,8 +99,7 @@ export class ProductFormComponent implements OnInit {
       ).subscribe();
     } else if (this.mode === 'edit') {
       this.products.modifyProduct(this.product._id, newProduct, this.productForm.get('image')!.value).pipe(
-        tap(({ message }) => {
-          console.log(message);
+        tap(( message ) => {
           this.loading = false;
           this.router.navigate(['/products']);
         }),

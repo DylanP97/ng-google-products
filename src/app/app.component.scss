@@ -1,7 +1,7 @@
 .container {
   position: relative;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1500px;
   min-height: 50vh;
   margin: auto;
   margin-bottom: 0%;
@@ -40,11 +40,23 @@ footer {
 
 /* styles for dark mode */
 .dark-mode {
-  background-color: #222;
+  background-color: #3d3d3d;
   color: #fff;
 }
 
 .dark-mode .footer {
   background-color: #222;
+}
+
+.tick-marker .circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4285f4;
+  margin-top: 4px;
+}
+
+.dark-mode .tick-marker .circle {
+  background-color: #fff;
 }
 

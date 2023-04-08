@@ -3,6 +3,7 @@ import { catchError, debounceTime, distinctUntilChanged, mapTo, Observable, of, 
 import { User } from '../models/User.model';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UsersService {
               private auth: AuthService) {}
 
   getUsers() {
-    this.http.get<User[]>('http://localhost:3000/api/user').pipe(
+    this.http.get<User[]>(`${environment.API_URL}/api/user/`).pipe(
       tap(users => this.users$.next(users)),
       catchError(error => {
         console.error(error.error.message);
@@ -29,7 +30,7 @@ export class UsersService {
   }
 
 getUserById(id: string) {
-  return this.http.get<User>('http://localhost:3000/api/user/' + id).pipe(
+  return this.http.get<User>(`${environment.API_URL}/api/user/` + id).pipe(
     tap(user => {
       this.user$.next(user);
     }),

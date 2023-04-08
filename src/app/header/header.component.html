@@ -10,13 +10,13 @@
           All Technologies
         </a>
       </li>
-      <li *ngIf="isAuth$ | async">
+      <li *ngIf="(isAuth$ | async) && (isAdmin$ | async)">
         <a
           routerLink="new-product"
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          Add a Google Technology
+          Add a Technology
         </a>
       </li>
     </ul>
@@ -24,22 +24,7 @@
   <div class="logo">
     <div class="logo-text">
       <h3 aria-label="Products Google" class="animated-headline__headline">
-        <br />G<div class="animated-headline__icons-container">
-          <img
-            src="https://lh3.googleusercontent.com/jUoaTIlBn5ibfQcND2n5OMD6Z7xoqNj-ShHlFR6QuLffLXD5pS8V2eNg1rGlrsRrnDkoQ28O8UHzqzBQKAGY4l1CS2NQSq2SkRScK6FOjl82jppyohK-"
-            aria-hidden="true"
-            class="animated-headline__icon loaded"
-          />
-          <img
-            src="https://lh3.googleusercontent.com/PtL9QBP58JZC0A0k1u4fSn-rXbpaG52216P0l4ydM3c21L78uPPad73jY6ngd2tS-qu8Ec7jV_oxz8wK70fhBxYrffuWUGmuh-HfMyUsfUJSPQzGuCOW"
-            aria-hidden="true"
-            class="animated-headline__icon loaded"
-          />
-        </div>g<div class="animated-headline__icons-container"><img
-          src="https://lh3.googleusercontent.com/p4M1mK1Lbtc2tt54b6JUQUJ5U8RcwHnEAPH7_87X2NH9Rc8N9ek0Xm2BUq_wmLuOWXlylcDlZFOg4xF3aQtwsyF9frOHoqiQdWVpG-v4VO-Jb_4lIQ"
-          aria-hidden="true"
-          class="animated-headline__icon loaded"
-        /></div>e Products<br />
+        <br />WebDev Techs<br />
       </h3>
     </div>
   </div>
@@ -88,18 +73,29 @@
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        Listing all Google Tech Products
+        Listing all Tech
       </a>
     </li>
   </ul>
   <ul>
     <li *ngIf="(isAuth$ | async)">
       <a
-        routerLink="chronology-slider"
+        routerLink="basic-chronology"
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        Chronology Release Date
+        Basic Chronology
+      </a>
+    </li>
+  </ul>
+  <ul>
+    <li *ngIf="(isAuth$ | async)">
+      <a
+        routerLink="realtime-chronology"
+        routerLinkActive="active"
+        *ngIf="(isAuth$ | async)"
+      >
+        RealTime Chronology
       </a>
     </li>
   </ul>

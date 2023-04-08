@@ -1,15 +1,6 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <ng-container *ngIf="products$ | async as products" matRipple>
   <p *ngIf="!loading && products.length <= 0">No products to display!</p>
-  <p class="list-title" *ngIf="!loading && products.length > 0">
-    All the products made by Google
-    <a
-      href="https://about.google/intl/ALL_fr/products/"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Reference</a
-    >
-  </p>
   <br />
   <mat-paginator
     [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
@@ -35,9 +26,6 @@
       <hr />
       <p>{{ product.likes }} likes</p>
       <p>{{ product.dislikes }} dislikes</p>
-      <hr />
-      <p>Added by {{ product.username }}</p>
-      <br />
     </div>
   </div>
 </ng-container>

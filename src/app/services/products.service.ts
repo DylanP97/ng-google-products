@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import {
   catchError,
-  forkJoin,
   map,
   mapTo,
   Observable,
   of,
   Subject,
-  switchMap,
   tap,
   throwError,
 } from 'rxjs';
 import { Product } from '../models/Product.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { UsersService } from './users.service';
+import { environment } from 'src/environments/environment.prod';
+
+declare global {
+  interface FormData {
+    entries(): IterableIterator<[string, FormDataEntryValue]>;
+  }
+}
 
 @Injectable({
   providedIn: 'root',
@@ -27,23 +31,51 @@ export class ProductsService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private usersService: UsersService
   ) {}
 
+  createProduct(product: Product, image: File) {
+    const formData = new FormData();
+    formData.append('product', JSON.stringify(product));
+    formData.append('imageUrl', image);
+
+    return this.http
+      .post<{ message: string }>(`${environment.API_URL}/api/product`, formData)
+      .pipe(catchError((error) => error));
+  }
+
+  modifyProduct(id: string, product: Product, image: any) {
+
+    const formData = new FormData();
+    formData.append('product', JSON.stringify(product));
+    if (image) formData.append('imageUrl', image);
+
+    for (const [key, value] of formData.entries()) {
+    }
+    return this.http
+      .put<{ message: string }>(
+        `${environment.API_URL}/api/product/` + id, formData
+      )
+      .pipe(catchError((error) => error.error));
+  }
+
+  deleteProduct(id: string) {
+    return this.http
+      .delete<{ message: string }>(`${environment.API_URL}/api/product/` + id)
+      .pipe(catchError((error) => error.error.message));
+  }
 
   getAllProducts(): Observable<Product[]> {
     return this.http
-      .get<{ products: Product[] }>('http://localhost:3000/api/product/all')
+      .get<{ products: Product[] }>(`${environment.API_URL}/api/product/all`)
       .pipe(
-        map(response => response.products),
-        tap(products => console.log(products)),
+        map((response) => response.products),
+        tap((products) => console.log(products)),
         catchError((error) => {
           console.error(error.error.message);
           return of([]);
         })
       );
   }
-  
 
   getProducts(page: number = 0, pageSize: number = 10) {
     const params = new HttpParams()
@@ -52,22 +84,11 @@ export class ProductsService {
 
     this.http
       .get<{ totalProducts: number; products: Product[] }>(
-        'http://localhost:3000/api/product',
+        `${environment.API_URL}/api/product`,
         { params }
       )
       .pipe(
-        switchMap(({ totalProducts, products }) => {
-          return forkJoin(
-            products.map((product) => {
-              return this.usersService.getUserById(product.userId).pipe(
-                map((user) => {
-                  product.user = user;
-                  return product;
-                })
-              );
-            })
-          ).pipe(map((products) => ({ totalProducts, products })));
-        }),
+        map(({ totalProducts, products }) => ({ totalProducts, products })),
         tap(({ totalProducts, products }) => {
           this.totalProducts$.next(totalProducts);
           this.products$.next(products);
@@ -82,15 +103,10 @@ export class ProductsService {
 
   getProductById(id: string) {
     return this.http
-      .get<Product>('http://localhost:3000/api/product/' + id)
+      .get<Product>(`${environment.API_URL}/api/product/` + id)
       .pipe(
-        switchMap((product) => {
-          return this.usersService.getUserById(product.userId).pipe(
-            map((user) => {
-              product.user = user;
-              return product;
-            })
-          );
+        map((product) => {
+          return product;
         }),
         catchError((error) => throwError(error.error.message))
       );
@@ -99,7 +115,7 @@ export class ProductsService {
   likeProduct(id: string, like: boolean) {
     return this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/product/' + id + '/like',
+        `${environment.API_URL}/api/product/` + id + '/like',
         { userId: this.auth.getUserId(), like: like ? 1 : 0 }
       )
       .pipe(
@@ -111,48 +127,12 @@ export class ProductsService {
   dislikeProduct(id: string, dislike: boolean) {
     return this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/product/' + id + '/like',
+        `${environment.API_URL}/api/product/` + id + '/like',
         { userId: this.auth.getUserId(), like: dislike ? -1 : 0 }
       )
       .pipe(
         mapTo(dislike),
         catchError((error) => throwError(error.error.message))
       );
-  }
-
-  createProduct(product: Product, image: File) {
-    const formData = new FormData();
-    formData.append('product', JSON.stringify(product));
-    formData.append('image', image);
-    return this.http
-      .post<{ message: string }>('http://localhost:3000/api/product', formData)
-      .pipe(catchError((error) => throwError(error.error.message)));
-  }
-
-  modifyProduct(id: string, product: Product, image: string | File) {
-    if (typeof image === 'string') {
-      return this.http
-        .put<{ message: string }>(
-          'http://localhost:3000/api/product/' + id,
-          product
-        )
-        .pipe(catchError((error) => throwError(error.error.message)));
-    } else {
-      const formData = new FormData();
-      formData.append('product', JSON.stringify(product));
-      formData.append('image', image);
-      return this.http
-        .put<{ message: string }>(
-          'http://localhost:3000/api/product/' + id,
-          formData
-        )
-        .pipe(catchError((error) => throwError(error.error.message)));
-    }
-  }
-
-  deleteProduct(id: string) {
-    return this.http
-      .delete<{ message: string }>('http://localhost:3000/api/product/' + id)
-      .pipe(catchError((error) => throwError(error.error.message)));
   }
 }

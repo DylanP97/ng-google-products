@@ -17,14 +17,14 @@ export class ProductListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   products$!: Observable<Product[]>;
   totalProducts$!: Observable<number>;
+  totalProducts!: number;
   loading!: boolean;
   errorMsg!: string;
-  pageSize = 5;
-  pageSizeOptions = [3, 5, 10, 25];
+  pageSize = 10;
+  pageSizeOptions = [3, 5, 10, this.totalProducts];
   currentPage = 0;
 
   constructor(
-    public userService: UsersService,
     private productService: ProductsService,
     private router: Router,
     public darkModeService: DarkModeService
@@ -47,6 +47,8 @@ export class ProductListComponent implements OnInit {
       this.productService.totalProducts$,
       this.products$
     ]).subscribe(([totalProducts, products]) => {
+      this.totalProducts = totalProducts;
+      this.pageSizeOptions.push(this.totalProducts)
       this.totalProducts$ = of(totalProducts);
     });
     this.productService.getProducts(this.currentPage, this.pageSize);

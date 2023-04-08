@@ -62,4 +62,15 @@
 
 .control-buttons button {
   margin: 1em 1em 0 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .product-container {
+    flex-direction: column;
+  }
+  .product-container img {
+    max-height: 100px;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
 }/*# sourceMappingURL=single-product.component.css.map */

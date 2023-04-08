@@ -3,7 +3,7 @@ import { Product } from '../models/Product.model';
 import { ProductsService } from '../services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { catchError, EMPTY, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, shareReplay, switchMap, take, tap, throwError } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -24,29 +24,37 @@ export class SingleProductComponent implements OnInit {
   funColor1 = 'rgba(140,255,13,0.5802696078431373)';
   funColor2 = 'rgba(255,13,245,0.5802696078431373)';
   funColor3 = 'rgba(17,13,255,0.5802696078431373)';
+  isAdmin$!: Observable<boolean>;
 
-  constructor(private products: ProductsService,
+  constructor(
+    private products: ProductsService,
     private route: ActivatedRoute,
     private auth: AuthService,
     private router: Router,
-    private datePipe: DatePipe) { }
+  ) { }
 
   ngOnInit() {
     this.userId = this.auth.getUserId();
+    this.isAdmin$ = this.auth.isAdmin$;
     this.loading = true;
     this.product$ = this.route.params.pipe(
       map(params => params['id']),
-      switchMap(id => this.products.getProductById(id)),
-      tap(product => {
-        const yearLaunched = this.datePipe.transform(product.yearLaunched, 'yyyy-MM-dd');
-        product.yearLaunched = yearLaunched || '';  
-
+      switchMap(id => {
+        return this.products.getProductById(id).pipe(
+          tap(product => {
+            this.loading = false;
+            if (product.usersLiked.find(user => user === this.userId)) {
+              this.liked = true;
+            } else if (product.usersDisliked.find(user => user === this.userId)) {
+              this.disliked = true;
+            }
+          })
+        );
+      }),
+      catchError((error) => {
         this.loading = false;
-        if (product.usersLiked.find(user => user === this.userId)) {
-          this.liked = true;
-        } else if (product.usersDisliked.find(user => user === this.userId)) {
-          this.disliked = true;
-        }
+        this.errorMessage = error.error.message;
+        return throwError(error);
       })
     );
   }

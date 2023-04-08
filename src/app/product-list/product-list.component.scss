@@ -15,8 +15,8 @@
   transition-delay: 200ms;
 
   img {
-    max-height: 100px;
-    object-fit: cover;
+    height: 100px;
+    object-fit: contain;
     margin: 10%;
     max-width: 100px;
   }
@@ -79,7 +79,16 @@
   display: flex;
 }
 
+.mat-mdc-paginator {
+  background-color: #683ab700;
+}
+
 .dark-mode.mat-mdc-paginator {
-  background-color: rgb(71, 71, 71) !important;
+  background-color: rgba(71, 71, 71, 0) !important;
   color: white !important;
+}
+
+
+.mat-mdc-paginator-container * {
+  border-color: white !important;
 }

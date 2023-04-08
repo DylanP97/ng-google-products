@@ -1,8 +1,4 @@
 
-$google-green: #0F9D58;
-$google-blue: #4285F4;
-$google-red: #DB4437;
-$google-yellow: #F4B400;
 
 
 .animated-headline__headline {
@@ -133,7 +129,10 @@ nav.dark-mode {
 }
 
 
-@media (max-width: 767px) {
+
+
+/* Small screens */
+@media only screen and (max-width: 767px) {
   nav {
     flex-direction: column;
   }
@@ -141,8 +140,35 @@ nav.dark-mode {
   h5 {
     padding: 2%;
   }
+
+  .left-nav {
+    text-align: center;
+
+    ul {
+      justify-content: center;
+      align-items: center;
+    }
+    li {
+      width: 50%;
+      margin: 0px;
+    }
+  }
   .right-nav {
     padding: 5%;
     width: fit-content;
+  }
+
+  .left-nav, .right-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .sub-nav {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
   }
 }

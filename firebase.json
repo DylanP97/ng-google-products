@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/ng-google-products",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
