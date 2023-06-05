@@ -1,20 +1,20 @@
 <mat-form-field class="example-full-width search-bar" appearance="fill">
-  <mat-label>State</mat-label>
+  <mat-label>Search for products</mat-label>
   <input
     matInput
-    aria-label="State"
+    aria-label="Product"
     [matAutocomplete]="auto"
     [formControl]="stateCtrl"
   />
   <mat-autocomplete #auto="matAutocomplete">
     <mat-option
-      *ngFor="let state of filteredProducts | async"
-      [value]="state.name"
+      *ngFor="let product of filteredProducts | async"
+      [value]="product.name"
       class="mat-option-search-item"
     >
-      <img alt="" class="search-item-img" [src]="state.imageUrl" height="25" />
-      <span>{{ state.name }}</span> |
-      <small>Category: {{ state.category }}</small>
+      <img alt="" class="search-item-img" [src]="product.imageUrl" height="25" />
+      <span>{{ product.name }}</span> |
+      <small>Category: {{ product.category }}</small>
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

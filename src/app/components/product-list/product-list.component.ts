@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { UsersService } from '../../services/users.service';
 
 import { catchError, combineLatest, map, Observable, of, tap } from 'rxjs';
 import { Product } from '../../models/Product.model';
 import { Router } from '@angular/router';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +16,10 @@ import { MatPaginator } from '@angular/material/paginator';
 
 export class ProductListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(SearchBarComponent) searchBar!: SearchBarComponent;
   products$!: Observable<Product[]>;
+  products!: Product[];
+  filteredProducts$!: Observable<Product[]>;
   totalProducts$!: Observable<number>;
   totalProducts!: number;
   loading!: boolean;
@@ -29,14 +32,15 @@ export class ProductListComponent implements OnInit {
     private productService: ProductsService,
     private router: Router,
     public darkModeService: DarkModeService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit() {
     this.loading = true;
     this.products$ = this.productService.products$.pipe(
       tap(() => {
         this.loading = false;
-        this.errorMsg = '';
       }),
       catchError((error) => {
         this.errorMsg = JSON.stringify(error);
@@ -48,6 +52,7 @@ export class ProductListComponent implements OnInit {
       this.productService.totalProducts$,
       this.products$,
     ]).subscribe(([totalProducts, products]) => {
+      this.products = products;
       this.totalProducts = totalProducts;
       this.pageSizeOptions.push(this.totalProducts);
       this.totalProducts$ = of(totalProducts);

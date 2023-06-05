@@ -1,6 +1,5 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
-<ng-container *ngIf="products$ | async as products" matRipple>
-  <p *ngIf="!loading && products.length <= 0">No products to display!</p>
+<ng-container *ngIf="products" matRipple>
   <br />
   <mat-paginator
     [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
@@ -31,6 +30,9 @@
       <p>{{ product.likes }} likes</p>
       <p>{{ product.dislikes }} dislikes</p>
     </div>
+  </div>
+  <div class="product-list">
+    <p *ngIf="!loading && products.length <= 0">No products to display!</p>
   </div>
 </ng-container>
 <button class="add-new" (click)="onAddNew()" mat-fab extended>

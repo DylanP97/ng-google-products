@@ -10,30 +10,33 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
+
 export class SearchBarComponent {
   stateCtrl = new FormControl('');
   filteredProducts!: Observable<Product[]>;
   products$!: Observable<Product[]>;
-  products: Product[] = [];  
+  products: Product[] = [];
 
-  constructor(
-    private productService: ProductsService,
-  ) {
+  constructor(private productService: ProductsService) {
     this.products$ = this.productService.getAllProducts();
     this.products$.subscribe((products) => {
       this.products = products;
       this.filteredProducts = this.stateCtrl.valueChanges.pipe(
         startWith(''),
-        map((product) => (product ? this._filterProducts(product) : this.products.slice()))
+        map((product) =>
+          product ? this._filterProducts(product) : this.products.slice()
+        )
       );
     });
   }
 
   private _filterProducts(value: string): Product[] {
     const filterValue = value.toLowerCase();
-
-    return this.products.filter((product) =>
+    
+    const newProducts = this.products.filter((product) =>
       product.name.toLowerCase().includes(filterValue)
     );
+    return newProducts;
   }
+
 }

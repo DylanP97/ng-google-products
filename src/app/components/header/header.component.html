@@ -7,7 +7,7 @@
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          All Events
+          All Products
         </a>
       </li>
       <li *ngIf="(isAuth$ | async) && (isAdmin$ | async)">
@@ -16,15 +16,15 @@
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          Add an Event
+          Add a Product
         </a>
       </li>
     </ul>
   </div>
   <div class="logo">
     <div class="logo-text">
-      <h3 aria-label="Products Google" class="animated-headline__headline">
-        <br />Events and Chronologies<br />
+      <h3 aria-label="" class="animated-headline__headline">
+        <br />Google Products<br />
       </h3>
     </div>
   </div>
@@ -73,7 +73,7 @@
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        Listing all Events
+        Listing all Products
       </a>
     </li>
   </ul>

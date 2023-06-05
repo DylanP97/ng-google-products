@@ -4,14 +4,7 @@
 }
 
 .search-item-img {
-    margin-right: 25px;
-    width: 50px;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 2 / 1;
     object-fit: cover;
-}
-
-.mat-option-search-item {
-    display: flex;
-    justify-content: center;
-    flex-direction: column !important;
+    margin-right: 10px;
 }
