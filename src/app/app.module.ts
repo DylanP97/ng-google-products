@@ -8,16 +8,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 // Components
-import { BasicSliderComponent } from './basic-slider/basic-slider.component';
-import { ChronologyRealTimeComponent } from './chronology-realtime/chronology-realtime.component';
+import { BasicSliderComponent } from './components/chronologies/basic-slider/basic-slider.component';
+import { ChronologyRealTimeComponent } from './components/chronologies/chronology-realtime/chronology-realtime.component';
 import { AppComponent } from './app.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { SingleProductComponent } from './single-product/single-product.component';
-import { ProductFormComponent } from './product-form/product-form.component';
-import { HeaderComponent } from './header/header.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 // Services, Routing, Interceptors
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +40,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     HeaderComponent,
     PageNotFoundComponent,
     ChronologyRealTimeComponent,
-    BasicSliderComponent
+    BasicSliderComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatNativeDateModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatSliderModule
+    MatSliderModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

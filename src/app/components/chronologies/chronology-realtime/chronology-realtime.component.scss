@@ -1,0 +1,91 @@
+.list-title {
+  text-align: center;
+  margin-top: 2em;
+}
+.list-paragraph {
+  text-align: center;
+}
+.description-card {
+  background-color: #683ab73d;
+  color: black !important;
+  border-radius: 20px;
+  padding : 20px;
+  margin-top: 50px;
+  z-index: 3;
+  overflow: hidden;
+}
+.dark-mode.description-card {
+  background-color: rgb(71, 71, 71);
+  color: white !important;
+}
+.description-card img {
+  height: 350px;
+  width: 350px;
+  position: absolute;
+  bottom: -120px;
+  right: -20px;
+  opacity: 0.3;
+}
+.dark-mode.mat-mdc-card-subtitle {
+  color: white;
+}
+.container {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+.mat-mdc-card-header {
+  z-index: 4;
+}
+.mat-mdc-card-content {
+  z-index: 4;
+}
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.circle {
+  position: absolute;
+  top: 19px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #673ab7;
+  cursor: default;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+.dark-mode.circle {
+  background-color: rgb(0, 0, 0);
+}
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #673ab7;
+  --mdc-slider-focus-handle-color: #673ab7;
+  --mdc-slider-hover-handle-color: #673ab7;
+  --mdc-slider-active-track-color: #673ab7;
+  --mdc-slider-inactive-track-color: #3f0064;
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: #673ab7;
+  --mat-mdc-slider-ripple-color: #673ab7;
+  --mat-mdc-slider-hover-ripple-color: rgba(167, 0, 144, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(87, 9, 133, 0.2);
+}
+
+.dark-mode.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #353535;
+  --mdc-slider-focus-handle-color: #353535;
+  --mdc-slider-hover-handle-color: #353535;
+  --mdc-slider-active-track-color: #353535;
+  --mdc-slider-inactive-track-color: #111111;
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: #353535;
+  --mat-mdc-slider-ripple-color: #353535;
+  --mat-mdc-slider-hover-ripple-color: rgba(46, 46, 46, 0.418);
+  --mat-mdc-slider-focus-ripple-color: rgba(32, 32, 32, 0.438);
+}

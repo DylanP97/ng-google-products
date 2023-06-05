@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <section>
   <h2 class="list-title">
-    Chronology of the release date of Google technologies!
+    Chronology events by year
   </h2>
   <p class="list-paragraph">When the thumb is selected, you can use the arrows of your keyboard to switch between months</p>
   <br />
@@ -10,18 +10,20 @@
       #slider
       (change)="onSliderChange($event)"
       class="slider"
-      [min]="0"
-      [max]="this.allMonths.length - 1"
+      [min]="startYear"
+      [max]="endYear"
       step="1"
       showTickMarks
       discrete
+      [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
     >
       <input matSliderThumb #sliderThumb />
       <div class="track-container">
-        <div *ngFor="let index of productMonthIndices">
+        <div *ngFor="let index of productYearIndices">
           <div
+            [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
             class="circle"
-            [style.left]="((index / (this.allMonths.length - 1)) * 100) + '%'"
+            [style.left]="((index / (this.allYears.length - 1)) * 100) + '%'"
           ></div>
         </div>
       </div>
@@ -29,7 +31,7 @@
   </div>
   <br>
   <div class="container" *ngFor="let product of products">
-    <div [style.display]="formatDBDate(product.dbDate) === selectedMonth ? 'block' : 'none'">
+    <div [style.display]="product.dbYearsDuration.includes(this.selectedYear) ? 'block' : 'none'">
       <mat-card class="description-card" [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }">
         <mat-card-header>
           <mat-card-title>{{ product.name }}</mat-card-title>
@@ -38,7 +40,8 @@
         <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}">
         <mat-card-content>
           <p>{{ product.description }}</p>
-          <p>Launched in {{ product.dbDate }}</p>
+          <p>Started the {{ product.dbDate }}</p>
+          <p>Ended the {{ product.dbEndDate }}</p>
         </mat-card-content>
       </mat-card>
     </div>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductsService } from '../services/products.service';
-import { Product } from '../models/Product.model';
-import { AuthService } from '../services/auth.service';
+import { ProductsService } from '../../services/products.service';
+import { Product } from '../../models/Product.model';
+import { AuthService } from '../../services/auth.service';
 import { catchError, EMPTY, switchMap, tap } from 'rxjs';
 
 @Component({
@@ -58,6 +58,7 @@ export class ProductFormComponent implements OnInit {
       description: [null, Validators.required],
       image: [null, Validators.required],
       dbDate: [null, Validators.required],
+      dbEndDate: [null],
     });
   }  
 
@@ -68,20 +69,42 @@ export class ProductFormComponent implements OnInit {
       description: [product.description, Validators.required],
       image: [product.imageUrl, Validators.required],
       dbDate: [new Date(product.dbDate), Validators.required],
+      dbEndDate: [product.dbEndDate ? new Date(product.dbEndDate) : null],
     });
     this.imagePreview = this.product.imageUrl;
+  }
+
+  getYearsBetween = (start: number, end: number) => {
+    const years = [];
+    for (let i = start; i <= end; i++) {
+      years.push(i);
+    }
+    return years;
   }
 
   onSubmit() {
     const dateInputResponse = this.productForm.get('dbDate')!.value;
     const dateMMDDYYYY = dateInputResponse.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
+    const dateYear = dateInputResponse.getFullYear();
+    
+    const endDateInputResponse = this.productForm.get('dbEndDate')!.value;
+    const endDateMMDDYYYY = endDateInputResponse?.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}) ?? null;
+    const endDateYear = endDateInputResponse?.getFullYear() ?? null;
+
+    const duration = endDateYear ? endDateYear - dateYear : null;    
+    const durationYears = endDateYear ? this.getYearsBetween(dateYear, endDateYear) : [dateYear];
+      
     this.loading = true;
     const newProduct = new Product();
     newProduct.name = this.productForm.get('name')!.value;
     newProduct.category = this.productForm.get('category')!.value;
     newProduct.description = this.productForm.get('description')!.value;
     newProduct.dbDate = dateMMDDYYYY;
-    newProduct.dbYear = dateInputResponse.getFullYear();
+    newProduct.dbYear = dateYear;
+    newProduct.dbEndDate = endDateMMDDYYYY;
+    newProduct.dbEndYear = endDateYear;
+    newProduct.dbYearDuration = duration as number | undefined;
+    newProduct.dbYearsDuration = durationYears as number[] | undefined;
     newProduct.userId = this.auth.getUserId();
     
     if (this.mode === 'new') {

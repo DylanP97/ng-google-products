@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../models/Product.model';
-import { ProductsService } from '../services/products.service';
+import { Product } from '../../models/Product.model';
+import { ProductsService } from '../../services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { catchError, EMPTY, map, Observable, of, shareReplay, switchMap, take, tap, throwError } from 'rxjs';
 import { DatePipe } from '@angular/common';
 

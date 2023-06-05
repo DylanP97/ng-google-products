@@ -15,7 +15,7 @@
 
 
   <mat-form-field appearance="fill" class="form-group">
-    <mat-label for="dbDate">Choose a creation/release date</mat-label>
+    <mat-label for="dbDate">Choose a start date</mat-label>
     <input matInput type="text" class="form-control" id="dbDate" formControlName="dbDate" [matDatepicker]="picker">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -23,6 +23,14 @@
   </mat-form-field>
 
   <br>
+
+  <mat-form-field appearance="fill" class="form-group">
+    <mat-label for="dbEndDate">Choose a end date (optional)</mat-label>
+    <input matInput type="text" class="form-control" id="dbEndDate" formControlName="dbEndDate" [matDatepicker]="pickerEnd">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+    <mat-datepicker #pickerEnd></mat-datepicker>
+  </mat-form-field>
 
   <div class="form-group">
     <label for="image" class="md-button md-raised md-primary">

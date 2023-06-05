@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../../services/products.service';
 import { Observable } from 'rxjs';
-import { Product } from '../models/Product.model';
-import { DarkModeService } from '../services/dark-mode.service';
+import { Product } from '../../../models/Product.model';
+import { DarkModeService } from '../../../services/dark-mode.service';
 import { DatePipe } from '@angular/common';
 
 @Component({

@@ -13,6 +13,10 @@
     color="primary"
     >
   </mat-paginator>
+  <br />
+  <app-search-bar
+    [ngClass]="{ 'dark-mode': darkModeService.isDarkMode }"
+  ></app-search-bar>
   <div class="product-list" *ngIf="!loading && products.length > 0">
     <div
       class="product-list-item"

@@ -7,7 +7,9 @@
     <br>
     <p>{{ product.description }}</p>
     <br>
-    <p>Released in {{ product.dbDate }}</p>
+    <p>Begin in {{ product.dbDate }}</p>
+    <p>End in {{ product?.dbEndDate }}</p>
+    <p>Duration of {{ product?.dbYearDuration }} year(s)</p>    
     <br>
     <div class="like-buttons">
       <div class="likes">

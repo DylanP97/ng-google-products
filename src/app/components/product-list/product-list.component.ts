@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductsService } from '../services/products.service';
-import { UsersService } from '../services/users.service';
+import { ProductsService } from '../../services/products.service';
+import { UsersService } from '../../services/users.service';
 
 import { catchError, combineLatest, map, Observable, of, tap } from 'rxjs';
-import { Product } from '../models/Product.model';
+import { Product } from '../../models/Product.model';
 import { Router } from '@angular/router';
-import { DarkModeService } from '../services/dark-mode.service';
+import { DarkModeService } from '../../services/dark-mode.service';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
+
 export class ProductListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   products$!: Observable<Product[]>;
@@ -45,10 +46,10 @@ export class ProductListComponent implements OnInit {
     );
     combineLatest([
       this.productService.totalProducts$,
-      this.products$
+      this.products$,
     ]).subscribe(([totalProducts, products]) => {
       this.totalProducts = totalProducts;
-      this.pageSizeOptions.push(this.totalProducts)
+      this.pageSizeOptions.push(this.totalProducts);
       this.totalProducts$ = of(totalProducts);
     });
     this.productService.getProducts(this.currentPage, this.pageSize);

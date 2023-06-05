@@ -7,7 +7,7 @@
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          All Technologies
+          All Events
         </a>
       </li>
       <li *ngIf="(isAuth$ | async) && (isAdmin$ | async)">
@@ -16,7 +16,7 @@
           routerLinkActive="active"
           *ngIf="isAuth$ | async"
         >
-          Add a Technology
+          Add an Event
         </a>
       </li>
     </ul>
@@ -24,7 +24,7 @@
   <div class="logo">
     <div class="logo-text">
       <h3 aria-label="Products Google" class="animated-headline__headline">
-        <br />WebDev Techs<br />
+        <br />Events and Chronologies<br />
       </h3>
     </div>
   </div>
@@ -73,18 +73,7 @@
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        Listing all Tech
-      </a>
-    </li>
-  </ul>
-  <ul>
-    <li *ngIf="(isAuth$ | async)">
-      <a
-        routerLink="basic-chronology"
-        routerLinkActive="active"
-        *ngIf="(isAuth$ | async)"
-      >
-        Basic Chronology
+        Listing all Events
       </a>
     </li>
   </ul>
@@ -95,7 +84,7 @@
         routerLinkActive="active"
         *ngIf="(isAuth$ | async)"
       >
-        RealTime Chronology
+        Yearly Chronology
       </a>
     </li>
   </ul>

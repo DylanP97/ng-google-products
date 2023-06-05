@@ -69,7 +69,6 @@ export class ProductsService {
       .get<{ products: Product[] }>(`${environment.API_URL}/api/product/all`)
       .pipe(
         map((response) => response.products),
-        tap((products) => console.log(products)),
         catchError((error) => {
           console.error(error.error.message);
           return of([]);

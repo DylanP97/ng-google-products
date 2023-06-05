@@ -1,0 +1,17 @@
+.search-bar {
+    width: 80%;
+    margin: 0% 10%;
+}
+
+.search-item-img {
+    margin-right: 25px;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.mat-option-search-item {
+    display: flex;
+    justify-content: center;
+    flex-direction: column !important;
+}
